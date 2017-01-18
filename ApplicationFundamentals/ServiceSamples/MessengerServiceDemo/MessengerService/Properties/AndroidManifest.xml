@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.xamarin.xample.messengerservice">
+	<uses-sdk android:minSdkVersion="21" />
+	<permission-group
+				android:name="com.xamarin.xample.messengerservice.GROUP"
+				android:label="@string/permission_group_label"
+				android:description="@string/permission_group_description"
+				 />
+				
+	<permission android:name="com.xamarin.xample.messengerservice.REQUEST_TIMESTAMP"
+				android:permissionGroup="com.xamarin.xample.messengerservice.GROUP"
+				android:protectionLevel="signature" 
+				android:label="@string/permission_label"
+			    android:description="@string/permission_description"
+				/>
+
+	<application android:allowBackup="true" 
+			android:icon="@mipmap/icon" 
+			android:label="@string/app_name" 
+			android:theme="@style/AppTheme">
+
+	</application>
+</manifest>
