@@ -73,7 +73,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimestampServiceConnection.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Service\TimestampBinder.cs" />
     <Compile Include="Service\TimestampRequestHandler.cs" />
     <Compile Include="Service\TimestampService.cs" />
     <Compile Include="MainActivityMessageHandler.cs" />

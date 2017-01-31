@@ -36,7 +36,6 @@ namespace MessengerClient
 
 				askForTimestampButton = FindViewById<Button>(Resource.Id.get_timestamp_button);
 				askForTimestampButton.Click += AskForTimestampButton_Click;
-
 			}
 			else
 			{
@@ -59,6 +58,7 @@ namespace MessengerClient
 					}
 					else 
 					{
+						Log.Warn(TAG, "Permission was not granted.");
 						timestampMessageTextView.SetText(Resource.String.permission_not_granted);
 						sayHelloButton.Enabled = false;
 						sayHelloButton.Click -= SayHelloToService_Click;
@@ -175,7 +175,6 @@ namespace MessengerClient
 				Log.Error(TAG, ex, "There was a problem sending the message.");
 			}
 		}
-
 
 		protected override void OnStop()
 		{

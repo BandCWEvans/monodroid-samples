@@ -31,9 +31,10 @@ namespace MessengerService
 				return null;
 			}
 		}
+
 		void ReplyWithTimestampTo(Message msg)
 		{
-			Messenger messenger = msg.ReplyTo;
+				Messenger messenger = msg.ReplyTo;
 			if (messenger == null)
 			{
 				Log.Wtf(TAG, "No Messenger instance - can't reply!");

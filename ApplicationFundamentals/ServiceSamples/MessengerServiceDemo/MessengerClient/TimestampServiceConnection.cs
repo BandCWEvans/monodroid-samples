@@ -1,6 +1,7 @@
 using Android.OS;
 using Android.Util;
 using Android.Content;
+using System;
 
 namespace MessengerClient
 {
@@ -8,15 +9,28 @@ namespace MessengerClient
 	{
 		static readonly string TAG = typeof(TimestampServiceConnection).FullName;
 
-		MainActivity mainActivity;
+		WeakReference<MainActivity> mainActivity;
 		public TimestampServiceConnection(MainActivity activity)
 		{
 			IsConnected = false;
-			mainActivity = activity;
+			mainActivity = new WeakReference<MainActivity>(activity);
 		}
 
 		public bool IsConnected { get; private set; }
 		public Messenger Messenger { get; private set; }
+
+		public MainActivity Activity
+		{
+			get
+			{
+				MainActivity activity;
+				if (mainActivity.TryGetTarget(out activity))
+				{
+					return activity;
+				}
+				return null;
+			}
+		}
 
 		public void OnServiceConnected(ComponentName name, IBinder service)
 		{
@@ -28,16 +42,16 @@ namespace MessengerClient
 
 			if (IsConnected)
 			{
-				mainActivity.timestampMessageTextView.SetText(Resource.String.service_started);
-				mainActivity.sayHelloButton.Enabled = true;
-				mainActivity.askForTimestampButton.Enabled = true;
-				mainActivity.isStarting = false;
+				Activity.timestampMessageTextView.SetText(Resource.String.service_started);
+				Activity.sayHelloButton.Enabled = true;
+				Activity.askForTimestampButton.Enabled = true;
+				Activity.isStarting = false;
 			}
 			else
 			{
-				mainActivity.timestampMessageTextView.SetText(Resource.String.service_not_connected);
-				mainActivity.sayHelloButton.Enabled = false;
-				mainActivity.askForTimestampButton.Enabled = false;
+				Activity.timestampMessageTextView.SetText(Resource.String.service_not_connected);
+				Activity.sayHelloButton.Enabled = false;
+				Activity.askForTimestampButton.Enabled = false;
 			}
 
 		}
@@ -47,9 +61,9 @@ namespace MessengerClient
 			Log.Debug(TAG, $"OnServiceDisconnected {name.ClassName}");
 			IsConnected = false;
 			Messenger = null;
-			mainActivity.sayHelloButton.Enabled = false;
-			mainActivity.askForTimestampButton.Enabled = false;
-			mainActivity.timestampMessageTextView.SetText(Resource.String.service_disconnected);
+			Activity.sayHelloButton.Enabled = false;
+			Activity.askForTimestampButton.Enabled = false;
+			Activity.timestampMessageTextView.SetText(Resource.String.service_disconnected);
 		}
 	}
 }

@@ -18,6 +18,8 @@ namespace MessengerClient
 		{
 			this.activity = new WeakReference<MainActivity>(activity);
 		}
+
+
 		MainActivity Activity
 		{
 			get
@@ -51,5 +53,4 @@ namespace MessengerClient
 			}
 		}
 	}
-	
 }
